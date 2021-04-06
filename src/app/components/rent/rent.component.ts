@@ -1,3 +1,4 @@
+import * as uuid from 'uuid';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Boat } from 'src/app/models/Boat';
@@ -33,6 +34,7 @@ export class RentComponent implements OnInit {
   duration: any;
   height: any;
   weight: any;
+  price: number;
 
   cartArray?: Boat[] = [];
   cartList?: string;
@@ -45,7 +47,6 @@ export class RentComponent implements OnInit {
   
   ngOnInit(): void {
     this.minDate.setDate(this.minDate.getDate() + 1);
-
     
   }
 
@@ -69,14 +70,18 @@ export class RentComponent implements OnInit {
   submitDate(){
     if(this.height == undefined || this.weight == undefined || this.date == undefined || this.duration == undefined || this.time == undefined){
       this.errorBoolean = true;
+      
     }else{
+      this.priceResolver(this.selectedBoat, this.duration);
       this.boatInfo = {
+        id: uuid.v4(),
         boat: this.selectedBoat,
         height: this.height,
         weight: this.weight,
         date: this.date,
         duration: this.duration,
         time: this.time,
+        price: this.price,
       }
       console.log(this.boatInfo);
       this.addToSessionStorage(this.boatInfo);
@@ -120,6 +125,28 @@ export class RentComponent implements OnInit {
     this.boatInfo.weight = "";
     this.addedToCartBoolean = false;
     this.boatBoolean = true;
+  }
+
+   priceResolver(boat:string, duration: string){
+    if(boat == "Single Kayak"){
+      switch(duration){
+        case "2": this.price = 30; break;
+        case "4": this.price = 40; break;
+        case "6": this.price = 55; break;
+      }
+    } else if(boat == "Tandem Kayak" || boat == "Canoe"){
+      switch(duration){
+        case "2": this.price = 45; break;
+        case "4": this.price = 55; break;
+        case "6": this.price = 65; break;
+      }
+    } else if(boat == "Fishing Kayak"){
+      switch(duration){
+        case "2": this.price = 35; break;
+        case "4": this.price = 45; break;
+        case "6": this.price = 60; break;
+      }
+    }
   }
 
   timeResolver(){

@@ -1,6 +1,6 @@
 <nav id="navbar">
     <a routerLink="/" class="title">Howling Wolfe</a>
-    <a routerLink="/cart"><img class="cart" src="../../../assets/canoe detail.png" alt="Canoe Cart"><div *ngIf="quantity" class="quantity">{{quantity}}</div></a>
+    <a routerLink="/cart"><img class="cart" src="../../../assets/canoe detail.png" alt="Canoe Cart" (click)="rentals()"><div *ngIf="quantity" class="quantity">{{quantity}}</div></a>
     
     <div class="links">
         <a routerLink="/rentals">Rentals</a>

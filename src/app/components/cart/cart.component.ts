@@ -22,6 +22,10 @@ export class CartComponent implements OnInit {
     phone: new FormControl('', Validators.required),
   })
 
+  subTotal: number =0;
+  taxes: number;
+  total: number = 0;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -31,8 +35,37 @@ export class CartComponent implements OnInit {
       this.tableBoolean = true;
       } else {
         this.emptyBoolean = true;
-      }
+    }
+  }
+  ngDoCheck(){
+    this.getTotals();  
 
+  }
+
+  getTotals(){
+    this.subTotal=0;
+    for(let i =0; i< this.boatsArray.length; i++){
+      console.log(this.boatsArray[i].price);
+      
+      this.subTotal += this.boatsArray[i].price;
+    }
+    this.taxes = this.subTotal * .08;
+    this.total = this.subTotal + this.taxes;
+  }
+
+  delete(event){
+    const id:string = event.path[3].children[0].innerText;
+    console.log(id);
+    console.log(event);
+    this.boatsArray = this.boatsArray.filter(item => item.id !== id);
+    console.log(this.boatsArray);
+    sessionStorage.setItem("cartList", JSON.stringify(this.boatsArray));
+     
+  }
+
+  checkOut(){
+    console.log("check out");
+    
   }
 
 }
