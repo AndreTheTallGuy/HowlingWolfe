@@ -50,9 +50,9 @@
         <mat-form-field>
             <mat-label >Duration</mat-label>
             <mat-select name="duration" class="duration" [(ngModel)]="duration" required (click)="reset()">
-                <mat-option [value]="2">2 hours</mat-option>
-                <mat-option [value]="4">Half Day(4 hours)</mat-option>
-                <mat-option [value]="6">Full Day(6 hours)</mat-option>
+                <mat-option [value]="'2'">2 hours</mat-option>
+                <mat-option [value]="'4'">Half Day(4 hours)</mat-option>
+                <mat-option [value]="'6'">Full Day(6 hours)</mat-option>
             </mat-select>
         </mat-form-field>
         <br>

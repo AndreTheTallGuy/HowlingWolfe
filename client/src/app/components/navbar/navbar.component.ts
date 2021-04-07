@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -9,7 +10,7 @@ export class NavbarComponent implements OnInit {
 
   quantity?: number;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     
@@ -19,9 +20,10 @@ export class NavbarComponent implements OnInit {
         this.quantity = JSON.parse(sessionStorage.getItem("cartList")).length;        
       }
   }
-  click(){
-    console.log("click");
+  rentals(){
+    console.log("clicking");
     
+    this.router.navigate(["/cart"]);
   }
-
+ 
 }
