@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Boat } from 'src/app/models/Boat';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
   stripeCheckout: boolean = false;
 
   boatsArray: Boat[] = [];
-
+  orderArray: any[]=[];
   userInfo = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -27,7 +28,7 @@ export class CartComponent implements OnInit {
   taxes: number;
   total: number = 0;
 
-  constructor() { }
+  constructor(private api: ApiService) { }
 
   ngOnInit(): void {
     if(sessionStorage.getItem("cartList")){
@@ -46,8 +47,6 @@ export class CartComponent implements OnInit {
   getTotals(){
     this.subTotal=0;
     for(let i =0; i< this.boatsArray.length; i++){
-      console.log(this.boatsArray[i].price);
-      
       this.subTotal += this.boatsArray[i].price;
     }
     this.taxes = this.subTotal * .08;
@@ -73,9 +72,13 @@ export class CartComponent implements OnInit {
   infoSubmit(){
     this.stripeCheckout = true;
     this.infoBoolean = false;
+    this.orderArray.push(this.userInfo.value);
+    this.orderArray.push(this.boatsArray);
+    console.log(this.orderArray);
+    
   }
 
   stripeSubmit(){
-    // send to backend
+    this.api.submitOrder(this.orderArray);
   }
 }
