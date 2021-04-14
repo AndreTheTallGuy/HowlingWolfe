@@ -1,15 +1,17 @@
 package com.HowlingWolfe.HowlingWolfe.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @Builder
 @Data
 @NoArgsConstructor
@@ -18,9 +20,15 @@ import javax.persistence.*;
 public class Order {
 
     @Id
-    @Column(name = "id")
-    @GeneratedValue
-    private int id;
+    @Column(name = "order_id")
+    private String order_id;
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
+
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Boat> boats;
 
 }
