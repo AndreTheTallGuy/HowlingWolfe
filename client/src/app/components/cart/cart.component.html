@@ -51,32 +51,32 @@
 </div>
 
 <div *ngIf="infoBoolean" class="container info">
-    <form class="form mt-4" [formGroup]="userInfo">
+    <form class="form mt-4" >
                
         <mat-form-field>
             <mat-label >First Name</mat-label>
-            <input name="firstName" matInput type="text" formControlName="firstName" class="firstName"  required>
+            <input name="firstName" matInput type="text" [(ngModel)]="firstName" class="firstName"  required>
         </mat-form-field>
         <br>
         <mat-form-field>
             <mat-label >Last Name</mat-label>
-            <input name="lastName" matInput type="text" formControlName="lastName" class="lastName"  required>
+            <input name="lastName" matInput type="text" [(ngModel)]="lastName" class="lastName"  required>
         </mat-form-field>
         <br>
         <mat-form-field>
             <mat-label >Email</mat-label>
-            <input name="email" matInput type="text" formControlName="email" class="email"  required>
+            <input name="email" matInput type="text" [(ngModel)]="email" class="email"  required>
         </mat-form-field>
         <br>
         <mat-form-field>
             <mat-label >Phone</mat-label>
-            <input name="phone" matInput type="text" formControlName="phone" class="phone"  required>
+            <input name="phone" matInput type="text" [(ngModel)]="phone" class="phone"  required>
         </mat-form-field>
         <br>
                
-        <button class="btn-secondary mb-4 submit" (click)="infoSubmit()" [disabled]="!userInfo.valid">Check Out</button>
+        <button class="btn-secondary mb-4 submit" (click)="infoSubmit()" >Check Out</button>
         
-        <div *ngIf="userInfo.invalid && (userInfo.dirty || userInfo.touched)"class="alert alert-danger">
+        <div *ngIf="alertBoolean" class="alert alert-danger">
             All fields are mandatory
         </div>
 

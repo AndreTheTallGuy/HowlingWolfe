@@ -14,6 +14,10 @@ nav {
   font-family: "Cinzel", serif;
 }
 
+.cart-link {
+  z-index: 20;
+}
+
 .cart {
   position: absolute;
   right: 30px;
@@ -38,6 +42,7 @@ nav {
   display: flex;
   justify-content: space-evenly;
   width: 100vw;
+  font-size: 18px;
 }
 
 li {
@@ -52,5 +57,5 @@ a:focus {
   text-decoration: none;
   color: black;
   font-family: "Cinzel", serif;
-  font-size: 18px;
+  /* font-size: 18px; */
 }

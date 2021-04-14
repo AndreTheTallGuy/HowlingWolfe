@@ -24,6 +24,9 @@
 .text {
   min-width: 200px;
 }
+p {
+  font-family: "Montserrat", sans-serif;
+}
 
 td {
   margin: 5px 0 5px 0;

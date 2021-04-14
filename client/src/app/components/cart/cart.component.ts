@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Boat } from 'src/app/models/Boat';
-import { ApiService } from 'src/app/services/api.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Order } from 'src/app/models/Order';
+import { Customer } from 'src/app/models/Customer';
+import { Boat } from '../../models/Boat';
+import { ApiService } from '../../services/api.service';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-cart',
@@ -14,21 +17,21 @@ export class CartComponent implements OnInit {
   emptyBoolean: boolean = false;
   tableBoolean: boolean = false;
   stripeCheckout: boolean = false;
+  alertBoolean: boolean = false;
 
   boatsArray: Boat[] = [];
-  orderArray: any[]=[];
-  userInfo = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl('', Validators.required),
-    phone: new FormControl('', Validators.required),
-  })
+  orderObj: Order = {order_id:"", customer: {}, boats: []};
+  
+  firstName!: any;
+  lastName!: any;
+  email!: any;
+  phone!: any;
 
-  subTotal: number =0;
+  subTotal: number = 0;
   taxes: number;
   total: number = 0;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
     if(sessionStorage.getItem("cartList")){
@@ -70,15 +73,33 @@ export class CartComponent implements OnInit {
   }
 
   infoSubmit(){
-    this.stripeCheckout = true;
-    this.infoBoolean = false;
-    this.orderArray.push(this.userInfo.value);
-    this.orderArray.push(this.boatsArray);
-    console.log(this.orderArray);
+    if(this.firstName == "" || this.lastName == "" || this.email == "" || this.phone == ""){
+      this.alertBoolean = true;
+    } else {
+      this.alertBoolean=false;
+      this.stripeCheckout = true;
+      this.infoBoolean = false;
+      const customer: Customer = {
+        firstName: this.firstName,
+        lastName: this.lastName,
+        email: this.email,
+        phone: this.phone
+      }
+      console.log(customer);
+      
+      this.orderObj.order_id = uuid.v4();
+      this.orderObj.customer = customer;
+      this.orderObj.boats = this.boatsArray;
+      console.log(this.orderObj);
+      
+    }
     
   }
 
   stripeSubmit(){
-    this.api.submitOrder(this.orderArray);
+    this.api.submitOrder(this.orderObj).subscribe(res =>{
+      console.log(res);
+      
+    });
   }
 }

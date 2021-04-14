@@ -20,14 +20,6 @@ export class RentComponent implements OnInit {
   dateBoolean: boolean = false;
   addedToCartBoolean: boolean = false;
   errorBoolean: boolean = false;
-
-  dateForm = new FormGroup({
-    date: new FormControl('', Validators.required),
-    time: new FormControl('', Validators.required),
-    duration: new FormControl('', Validators.required),
-    height: new FormControl('', Validators.required),
-    weight: new FormControl('', Validators.required)
-  })
   
   date: any;
   time: any;
@@ -68,7 +60,7 @@ export class RentComponent implements OnInit {
   }
 
   submitDate(){
-    if(this.height == undefined || this.weight == undefined || this.date == undefined || this.duration == undefined || this.time == undefined){
+    if(this.height == "" || this.weight == "" || this.date == "" || this.duration == "" || this.time == ""){
       this.errorBoolean = true;
       
     }else{
