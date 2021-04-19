@@ -26,6 +26,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { RentComponent } from './components/rent/rent.component';
 import { CartComponent } from './components/cart/cart.component';
+import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CartComponent } from './components/cart/cart.component';
     ContactComponent,
     RentComponent,
     CartComponent,
+    AdminComponent,
     
 
   ],

@@ -21,7 +21,8 @@ public class Order {
 
     @Id
     @Column(name = "order_id")
-    private String order_id;
+    @GeneratedValue
+    private int order_id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "customer_id", nullable = false)

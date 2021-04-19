@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "https://howlingwolfe.herokuapp.com/")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping(path = "/orders")
 public class OrderController {
 

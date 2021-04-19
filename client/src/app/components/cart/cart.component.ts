@@ -5,6 +5,7 @@ import { Customer } from 'src/app/models/Customer';
 import { Boat } from '../../models/Boat';
 import { ApiService } from '../../services/api.service';
 import * as uuid from 'uuid';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -31,7 +32,7 @@ export class CartComponent implements OnInit {
   taxes: number;
   total: number = 0;
 
-  constructor(private api: ApiService, private fb: FormBuilder) { }
+  constructor(private api: ApiService, private fb: FormBuilder, private router: Router) { }
 
   ngOnInit(): void {
     if(sessionStorage.getItem("cartList")){
@@ -87,7 +88,7 @@ export class CartComponent implements OnInit {
       }
       console.log(customer);
       
-      this.orderObj.order_id = uuid.v4();
+      // this.orderObj.order_id = uuid.v4();
       this.orderObj.customer = customer;
       this.orderObj.boats = this.boatsArray;
       console.log(this.orderObj);
@@ -99,7 +100,8 @@ export class CartComponent implements OnInit {
   stripeSubmit(){
     this.api.submitOrder(this.orderObj).subscribe(res =>{
       console.log(res);
-      
     });
+    sessionStorage.clear();
+    this.router.navigate(['/'])
   }
 }

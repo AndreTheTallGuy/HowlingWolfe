@@ -18,6 +18,8 @@ export class NavbarComponent implements OnInit {
   ngDoCheck(){
     if(sessionStorage.getItem("cartList")){
         this.quantity = JSON.parse(sessionStorage.getItem("cartList")).length;        
+      } else {
+        this.quantity = undefined;
       }
   }
   rentals(){
