@@ -17,6 +17,13 @@
         <button class="btn btn-secondary mb-4 submit" (click)="submit()" >Submit</button>
     </form>
     <div *ngIf="orderBoolean" class="orders">
+        <div class="mt-4">
+            <mat-button-toggle-group name="orderToggle" value="upcoming">
+              <mat-button-toggle (click)="all()" value="all">All</mat-button-toggle>
+              <mat-button-toggle (click)="upcoming()" value="upcoming">Upcoming</mat-button-toggle>
+              <mat-button-toggle (click)="today()" value="today">Today</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
         <table class="res-table">
             <tr>
                 <th class="header">Order Id</th>
@@ -41,7 +48,7 @@
                 <td class="data">{{order.name}}</td>
                 <td class="data">{{order.height}}</td>
                 <td class="data">{{order.weight}}</td>
-                <td class="data">{{order.email}}</td>
+                <td class="data email"><a target="_blank" href="mailto:{{order.email}}">{{order.email}}</a></td>
                 <td class="data">{{order.phone}}</td>
                 <td class="data"><a download="{{order.date |date:'yyyy_MMM_d'}}-{{order.name}}" href="http://localhost:4200/assets/Waiver.pdf">Download</a></td>
             </tr>

@@ -16,6 +16,7 @@ import { MatIconModule} from '@angular/material/icon';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { RentalComponent } from './components/rental/rental.component';
@@ -59,7 +60,8 @@ import { AdminComponent } from './components/admin/admin.component';
     MatDatepickerModule,
     MatNativeDateModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatButtonToggleModule
     
   ],
   providers: [],

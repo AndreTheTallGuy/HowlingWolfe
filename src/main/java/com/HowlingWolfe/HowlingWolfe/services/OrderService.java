@@ -14,10 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -34,9 +31,9 @@ public class OrderService {
         this.boatRepo = boatRepo;
     }
 
-    public List<Order> getOrders(){
-       return orderRepo.findAll();
-    }
+    public List<Order> getOrders(){ return orderRepo.findAll(); }
+
+    public Set<Order> getOrdersByDate(){ return orderRepo.findByDate();    }
 
     public String postOrder(Order orderObj){
         SendEmail.send("order", orderObj.getCustomer(), orderObj.getBoats());
