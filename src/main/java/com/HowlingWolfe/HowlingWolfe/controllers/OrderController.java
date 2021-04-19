@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -24,9 +25,12 @@ public class OrderController {
     @GetMapping(path = "/")
     public ResponseEntity<List<Order>> getAllOrders(){
         List<Order> response = orderService.getOrders();
-//        for(Order order : response){
-//            System.out.println(order);
-//        }
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/date")
+    public ResponseEntity<Set<Order>> getAllOrdersByDate(){
+        Set<Order> response = orderService.getOrdersByDate();
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

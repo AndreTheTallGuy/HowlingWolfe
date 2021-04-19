@@ -3,6 +3,7 @@ import { Order } from 'src/app/models/Order';
 import { OrderDisplay } from 'src/app/models/OrderDisplay';
 import { ApiService } from 'src/app/services/api.service';
 
+
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -25,34 +26,11 @@ export class AdminComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
-    this.api.getAllOrders().subscribe(res=>{
-      console.log(res);
-      this.orders = res;
-      for(let order of this.orders){
-        for(let boat of order.boats){
-        const display: OrderDisplay ={
-          id: order.order_id,
-          date: boat.date,
-          time: boat.time,
-          duration: boat.duration,
-          boat: boat.boat,
-          name: order.customer.firstName +" "+ order.customer.lastName,
-          height: boat.height,
-          weight: boat.weight,
-          email: order.customer.email,
-          phone: order.customer.phone
-        }        
-        this.orderDisplays.push(display);
-      }
-    }
-      console.log(this.orderDisplays);
-      this.sortedOrderDisplays = this.orderDisplays.sort((a:any, b:any)=>{
-        return +new Date(a.date) - +new Date(b.date);
-      });
-      
-      
-      
-    })
+    this.upcoming();
+
+    
+
+
 
     
   }
@@ -75,5 +53,63 @@ export class AdminComponent implements OnInit {
         
       })
     }
+  }
+
+  all(){
+      this.api.getAllOrders().subscribe(res=>{
+      console.log(res);
+      this.displayify(res);      
+      console.log(this.orderDisplays);
+      this.sort();
+    })
+  }
+
+  upcoming(){
+    this.api.getAllOrdersByDate().subscribe(res=>{
+      console.log(res);
+      this.displayify(res);      
+      console.log(this.orderDisplays);
+      this.sort();
+      })
+
+  }
+
+  today(){
+    console.log(this.orderDisplays);
+    
+    this.sortedOrderDisplays = this.orderDisplays.filter(item => {    
+      console.log(new Date(item.date).getTime() > new Date().getTime() && new Date(item.date).getTime() < new Date().getTime()+ (24 * 60 * 60 * 1000));
+      
+      
+     return new Date(item.date).getTime() > new Date().getTime() && new Date(item.date).getTime() < new Date().getTime()+ (24 * 60 * 60 * 1000)})
+    console.log(this.sortedOrderDisplays);
+    
+  }
+
+  sort(){
+    this.sortedOrderDisplays = this.orderDisplays.sort((a:any, b:any)=>{
+      return +new Date(a.date) - +new Date(b.date);
+    })
+  }
+
+  displayify(orders){
+    this.orderDisplays = [];
+    for(let order of orders){
+      for(let boat of order.boats){
+      const display: OrderDisplay ={
+        id: order.order_id,
+        date: boat.date,
+        time: boat.time,
+        duration: boat.duration,
+        boat: boat.boat,
+        name: order.customer.firstName +" "+ order.customer.lastName,
+        height: boat.height,
+        weight: boat.weight,
+        email: order.customer.email,
+        phone: order.customer.phone
+      }        
+      this.orderDisplays.push(display);
+    }
+  }
   }
 }
