@@ -22,8 +22,8 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors().configurationSource(corsConfigurationSource())
                 .and()
                 .authorizeRequests()
-                .antMatchers("/*")
-                .authenticated();
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated();
 //                .and()
 //                .oauth2ResourceServer()
 //                .jwt();
