@@ -27,11 +27,6 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.upcoming();
-
-    
-
-
-
     
   }
 
@@ -75,14 +70,9 @@ export class AdminComponent implements OnInit {
   }
 
   today(){
-    console.log(this.orderDisplays);
     
-    this.sortedOrderDisplays = this.orderDisplays.filter(item => {    
-      console.log(new Date(item.date).getTime() > new Date().getTime() && new Date(item.date).getTime() < new Date().getTime()+ (24 * 60 * 60 * 1000));
-      
-      
-     return new Date(item.date).getTime() > new Date().getTime() && new Date(item.date).getTime() < new Date().getTime()+ (24 * 60 * 60 * 1000)})
-    console.log(this.sortedOrderDisplays);
+    this.sortedOrderDisplays = this.orderDisplays.filter(item => {          
+     return new Date(item.date).getTime() > new Date().getTime() - (24 * 60 * 60 * 1000) && new Date(item.date).getTime() < new Date().getTime()})
     
   }
 
