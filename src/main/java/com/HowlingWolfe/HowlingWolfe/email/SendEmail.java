@@ -111,7 +111,7 @@ public class SendEmail {
         switch(type){
             case "order":
                 emailTo = customer.getEmail();
-                emailSubject = "Thank you for your Order";
+                emailSubject = "Thank you for your Reservation";
                 emailText =
                         new StringBuilder("<h1>Thank you " + customer.getFirstName() + " " + customer.getLastName() +
                         " for your order of: </h1> <h3> <br> <br>");
@@ -128,7 +128,7 @@ public class SendEmail {
                         " HowlingWolfe Canoe & Kayak </h3>");
                 break;
             case "orderJake":
-                emailTo = "Jake's email";
+                emailTo = "noreply.howlingwolfe@gmail.com";
                 emailSubject = "New Rental";
                 emailText = new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
                         " has placed an order <br> </h1>" +
@@ -154,7 +154,7 @@ public class SendEmail {
                         " HowlingWolfe Canoe & Kayak </h1>");
                 break;
             case "contactJake":
-                emailTo = "Jake's email";
+                emailTo = "noreply.howlingwolfe@gmail.com";
                 emailSubject = "Someone has reached out";
                 emailText =
                         new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
@@ -170,7 +170,7 @@ public class SendEmail {
                         " HowlingWolfe Canoe & Kayak </h1>");
                 break;
             case "lessonsJake":
-                emailTo = "Jake's email";
+                emailTo = "noreply.howlingwolfe@gmail.com";
                 emailSubject = "Someone has reached out about lessons";
                 emailText =
                         new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
@@ -186,7 +186,7 @@ public class SendEmail {
                         " HowlingWolfe Canoe & Kayak </h1>");
                 break;
             case "guidedJake":
-                emailTo = "Jake's email";
+                emailTo = "noreply.howlingwolfe@gmail.com";
                 emailSubject = "Someone has reached out about a guided trip";
                 emailText =
                         new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +

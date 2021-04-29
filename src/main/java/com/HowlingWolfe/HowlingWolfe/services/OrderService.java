@@ -37,7 +37,7 @@ public class OrderService {
 
     public String postOrder(Order orderObj){
         SendEmail.send("order", orderObj.getCustomer(), orderObj.getBoats());
-//        SendEmail.send("orderJake", orderObj.getCustomer(), orderObj.getBoats());
+        SendEmail.send("orderJake", orderObj.getCustomer(), orderObj.getBoats());
 
         try {
             customerRepo.save(orderObj.getCustomer());
