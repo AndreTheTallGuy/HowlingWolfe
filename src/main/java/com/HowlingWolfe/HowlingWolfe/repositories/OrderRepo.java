@@ -13,4 +13,7 @@ public interface OrderRepo extends JpaRepository<Order, Integer> {
 
     @Query("SELECT o FROM Order o JOIN o.boats b WHERE b.date >= CURRENT_DATE")
     Set<Order> findByDate();
+
+    @Query("SELECT o FROM Order o JOIN o.boats b WHERE b.date = CURRENT_DATE")
+    Set<Order> getTodaysOrders();
 }

@@ -45,6 +45,9 @@ public class Boat {
     @Column(name = "price")
     private int price;
 
+    @Column(name = "shuttle")
+    private String shuttle;
+
     @ManyToOne(cascade=CascadeType.ALL)
     @JoinColumn(name = "order_id", referencedColumnName = "order_id")
     @JsonBackReference
