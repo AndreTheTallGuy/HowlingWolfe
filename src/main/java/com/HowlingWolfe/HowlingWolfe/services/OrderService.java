@@ -33,7 +33,10 @@ public class OrderService {
 
     public List<Order> getOrders(){ return orderRepo.findAll(); }
 
-    public Set<Order> getOrdersByDate(){ return orderRepo.findByDate();    }
+    public Set<Order> getOrdersByDate(){ return orderRepo.findByDate();}
+
+    public Set<Order> getTodaysOrders(){ return orderRepo.getTodaysOrders();}
+
 
     public String postOrder(Order orderObj){
         SendEmail.send("order", orderObj.getCustomer(), orderObj.getBoats());

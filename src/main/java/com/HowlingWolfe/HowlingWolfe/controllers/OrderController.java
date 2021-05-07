@@ -34,6 +34,12 @@ public class OrderController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/today")
+    public ResponseEntity<Set<Order>> getOrdersToday(){
+        Set<Order> response = orderService.getTodaysOrders();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @PostMapping(path = "/post")
     public ResponseEntity<String> postOrder(@RequestBody Order order){
         String response = orderService.postOrder(order);
