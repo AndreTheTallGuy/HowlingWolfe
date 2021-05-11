@@ -117,6 +117,7 @@ public class SendEmail {
                         " for your order of: </h1> <h3> <br> <br>");
                         for(Boat boat : boats){
                             emailText.append("Boat: ").append(boat.getBoat()).append("<br>");
+                            emailText.append("Shuttle: ").append(boat.getShuttle()).append("<br>");
                             DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT);
                             emailText.append("Date: ").append(dateFormat.format(boat.getDate())).append("<br>");
                             emailText.append("Time: ").append(boat.getTime()).append("<br>");
@@ -136,6 +137,7 @@ public class SendEmail {
                         customer.getPhone() + " <br> <br>");
                         for(Boat boat : boats){
                             emailText.append("Boat: ").append(boat.getBoat()).append("<br>");
+                            emailText.append("Shuttle: ").append(boat.getShuttle()).append("<br>");
                             DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT);
                             emailText.append("Date: ").append(dateFormat.format(boat.getDate())).append("<br>");
                             emailText.append("Time: ").append(boat.getTime()).append("<br>");
