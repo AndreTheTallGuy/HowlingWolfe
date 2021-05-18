@@ -19,6 +19,7 @@ public class AccountsController {
     public AccountsController(AccountsService accountsService) {
         this.accountsService = accountsService;
     }
+
     @GetMapping(path = "/{username}")
     public ResponseEntity<String> getPassword(@PathVariable String username){
         String response = accountsService.getPass(username);

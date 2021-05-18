@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -28,9 +29,15 @@ public class OrderController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/date")
-    public ResponseEntity<Set<Order>> getAllOrdersByDate(){
-        Set<Order> response = orderService.getOrdersByDate();
+    @GetMapping(path = "/upcoming")
+    public ResponseEntity<Set<Order>> getAllOrdersUpcoming(){
+        Set<Order> response = orderService.getOrdersUpcoming();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/date/{date}")
+    public ResponseEntity<Set<Order>> getAllOrdersByDate(@PathVariable Date date){
+        Set<Order> response = orderService.getOrdersByDate(date);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

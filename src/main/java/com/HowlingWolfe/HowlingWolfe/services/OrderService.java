@@ -33,7 +33,9 @@ public class OrderService {
 
     public List<Order> getOrders(){ return orderRepo.findAll(); }
 
-    public Set<Order> getOrdersByDate(){ return orderRepo.findByDate();}
+    public Set<Order> getOrdersByDate(Date date) {return orderRepo.findByDate(date);}
+
+    public Set<Order> getOrdersUpcoming(){ return orderRepo.findUpcoming();}
 
     public Set<Order> getTodaysOrders(){ return orderRepo.getTodaysOrders();}
 
