@@ -20,7 +20,6 @@ public class AccountsService {
 
     public String getPass(String username){
         Account account = accountsRepo.findByUsername(username);
-        System.out.println(account);
         return account.getPassword();
     }
 }
