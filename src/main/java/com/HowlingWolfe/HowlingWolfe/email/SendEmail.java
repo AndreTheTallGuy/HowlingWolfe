@@ -113,18 +113,30 @@ public class SendEmail {
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for your Reservation";
                 emailText =
-                        new StringBuilder("<h1>Thank you " + customer.getFirstName() + " " + customer.getLastName() +
-                        " for your order of: </h1> <h3> <br> <br>");
+
+                        new StringBuilder("<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored.png' " +
+                                "alt='Howling Wolfe Logo' width='300px'><br><br>");
+                        emailText.append("<h1>Thank you ").append(customer.getFirstName()).append(" ")
+                                .append(customer.getLastName()).append(" for your reservation of: </h1> <h3> <br> " +
+                                "<br>");
                         for(Boat boat : boats){
                             emailText.append("Boat: ").append(boat.getBoat()).append("<br>");
                             emailText.append("Shuttle: ").append(boat.getShuttle()).append("<br>");
                             DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT);
                             emailText.append("Date: ").append(dateFormat.format(boat.getDate())).append("<br>");
                             emailText.append("Time: ").append(boat.getTime()).append("<br>");
-                            emailText.append("Duration: ").append(boat.getDuration()).append("<br>");
+                            emailText.append("Duration: ").append(boat.getDuration()).append(" hours <br>");
                             emailText.append("Height: ").append(boat.getHeight()).append("<br>");
                             emailText.append("Weight: ").append(boat.getWeight()).append("<br> <br>");
                         }
+                        emailText.append("Please meet at the <a href=\"https://www.google" +
+                                ".com/maps/place/Aurora+Athletic+Club/@41.7855914,-88.3208956,15" +
+                                ".08z/data=!4m5!3m4!1s0x880efad7812f555b:0x8d5c3884ae94eb7a!8m2!3d41.7860631!4d-88" +
+                                ".3140031\" target=\"_blank\">Aurora Athletic Club </a> at least 15 minutes prior to " +
+                                "your " +
+                                "reservation time. <br><br>");
+                        emailText.append("Please bring water to drink, a snack, dress in layers and be prepared to " +
+                                "get wet, water shoes are recommended <br><br>" );
                         emailText.append(" We look forward to paddling with you soon! <br> " +
                         " HowlingWolfe Canoe & Kayak </h3>");
                 break;
