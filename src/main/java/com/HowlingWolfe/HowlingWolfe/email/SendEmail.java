@@ -20,10 +20,10 @@ import java.util.Properties;
 
 public class SendEmail {
 
-    private static final String SMTP_SERVER = "smtp.gmail.com";
-    private static final String USERNAME = "noreply.howlingwolfe@gmail.com";
+    private static final String SMTP_SERVER = "smtp.office365.com";
+    private static final String USERNAME = "jake@howlingwolfe.com";
     private static final String PASSWORD = System.getenv("EMAIL_PASSWORD");
-    private static final String EMAIL_FROM = "noreply.howlingwolfe@gmail.com";
+    private static final String EMAIL_FROM = "jake@howlingwolfe.com";
 
     private static String emailTo = "";
     private static String emailSubject = "";
@@ -32,9 +32,11 @@ public class SendEmail {
     public static void send(String type, Customer customer, List<Boat> boats) {
 
         Properties prop = System.getProperties();
+        prop.put("mail.smtp.starttls.enable","true");
         prop.put("mail.smtp.auth", "true");
-        prop.put("mail.smtp.port", "465");
-        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        prop.put("mail.smtp.port", "587");
+//        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.TLSSocketFactory");
+//        prop.put("mail.smtp.socketFactory.fallback", "false");
 
         Session session = Session.getInstance(prop, null);
         Message msg = new MimeMessage(session);
@@ -141,7 +143,7 @@ public class SendEmail {
                         " HowlingWolfe Canoe & Kayak </h3>");
                 break;
             case "orderJake":
-                emailTo = "noreply.howlingwolfe@gmail.com";
+                emailTo = "jake@howlingwolfe.com";
                 emailSubject = "New Rental";
                 emailText = new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
                         " has placed an order <br> </h1>" +
@@ -168,7 +170,7 @@ public class SendEmail {
                         " HowlingWolfe Canoe & Kayak </h1>");
                 break;
             case "contactJake":
-                emailTo = "noreply.howlingwolfe@gmail.com";
+                emailTo = "jake@howlingwolfe.com";
                 emailSubject = "Someone has reached out";
                 emailText =
                         new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
@@ -184,7 +186,7 @@ public class SendEmail {
                         " HowlingWolfe Canoe & Kayak </h1>");
                 break;
             case "lessonsJake":
-                emailTo = "noreply.howlingwolfe@gmail.com";
+                emailTo = "jake@howlingwolfe.com";
                 emailSubject = "Someone has reached out about lessons";
                 emailText =
                         new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
@@ -200,7 +202,7 @@ public class SendEmail {
                         " HowlingWolfe Canoe & Kayak </h1>");
                 break;
             case "guidedJake":
-                emailTo = "noreply.howlingwolfe@gmail.com";
+                emailTo = "jake@howlingwolfe.com";
                 emailSubject = "Someone has reached out about a guided trip";
                 emailText =
                         new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
