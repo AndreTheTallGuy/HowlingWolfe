@@ -166,7 +166,7 @@ public class SendEmail {
                 emailText =
                         new StringBuilder("<h1>Thank you " + customer.getFirstName() + " " + customer.getLastName() +
                         " for contacting us. Someone will respond to your message as soon as " +
-                        "possible<br> " +
+                        "possible<br> <br>" +
                         " HowlingWolfe Canoe & Kayak </h1>");
                 break;
             case "contactJake":
@@ -175,14 +175,16 @@ public class SendEmail {
                 emailText =
                         new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
                                 " has reached out using the contact form. </h1> <br> <br> " +
-                                customer.getMessage());
+                                customer.getMessage() +
+                                " <br> <br> Contact info: <br>Email: " + customer.getEmail() + "<br>Phone: " +
+                                customer.getPhone() + " <br> <br>");
                 break;
             case "lessons":
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for contacting us";
                 emailText = new StringBuilder("<h1>Thank you " + customer.getFirstName() + " " + customer.getLastName() +
                         " for contacting us about lessons. Someone will respond to your message " +
-                        "as soon as possible <br> " +
+                        "as soon as possible <br> <br> " +
                         " HowlingWolfe Canoe & Kayak </h1>");
                 break;
             case "lessonsJake":
@@ -191,14 +193,16 @@ public class SendEmail {
                 emailText =
                         new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
                                 " has reached out about lessons. </h1> <br> <br> " +
-                                customer.getMessage());
+                                customer.getMessage() +
+                                " <br> <br> Contact info: <br>Email: " + customer.getEmail() + "<br>Phone: " +
+                                customer.getPhone() + " <br> <br>");
                 break;
             case "guided":
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for contacting us";
                 emailText = new StringBuilder("<h1>Thank you " + customer.getFirstName() + " " + customer.getLastName() +
                         " for contacting us about a guided trip. Someone will respond to your " +
-                        "message as soon as possible <br> " +
+                        "message as soon as possible <br> <br> " +
                         " HowlingWolfe Canoe & Kayak </h1>");
                 break;
             case "guidedJake":
@@ -207,7 +211,9 @@ public class SendEmail {
                 emailText =
                         new StringBuilder("<h1>" + customer.getFirstName() + " " + customer.getLastName() +
                                 " has reached out about a guided trip. </h1> <br> <br> " +
-                                customer.getMessage());
+                                customer.getMessage() +
+                                " <br> <br> Contact info: <br>Email: " + customer.getEmail() + "<br>Phone: " +
+                                customer.getPhone() + " <br> <br>");
                 break;
         }
 
