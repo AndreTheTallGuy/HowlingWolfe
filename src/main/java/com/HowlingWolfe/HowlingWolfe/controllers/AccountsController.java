@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = "https://howlingwolfe.herokuapp.com")
+@CrossOrigin(origins = "*")
 @RequestMapping(path = "/accounts")
 public class AccountsController {
 
