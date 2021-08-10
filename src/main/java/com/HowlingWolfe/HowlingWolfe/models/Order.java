@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -32,4 +33,6 @@ public class Order {
     @JsonManagedReference
     private List<Boat> boats;
 
+    @Column(name = "ordered_on")
+    private Date ordered_on = new Date();
 }
