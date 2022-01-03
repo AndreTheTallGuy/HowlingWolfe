@@ -2,6 +2,8 @@ package com.HowlingWolfe.HowlingWolfe.email;
 
 import com.HowlingWolfe.HowlingWolfe.models.Boat;
 import com.HowlingWolfe.HowlingWolfe.models.Customer;
+import com.HowlingWolfe.HowlingWolfe.models.GiftCard;
+import com.HowlingWolfe.HowlingWolfe.models.GiftObj;
 import com.sun.mail.smtp.SMTPTransport;
 
 import javax.activation.DataHandler;
@@ -44,6 +46,56 @@ public class SendEmail {
         try {
 
             messageResolver(type, customer, boats);
+
+            msg.setFrom(new InternetAddress(EMAIL_FROM));
+
+            msg.setRecipients(Message.RecipientType.TO,
+                    InternetAddress.parse(emailTo, false));
+//            msg.setRecipients(Message.RecipientType.BCC,
+//                    InternetAddress.parse("jake@gmail.com", false));
+
+            msg.setSubject(emailSubject);
+
+            // TEXT email
+            //msg.setText(EMAIL_TEXT);
+
+            // HTML email
+            msg.setDataHandler(new DataHandler(new HTMLDataSource(emailText.toString())));
+
+
+            SMTPTransport t = (SMTPTransport) session.getTransport("smtp");
+
+            // connect
+            t.connect(SMTP_SERVER, USERNAME, PASSWORD);
+
+            // send
+            t.sendMessage(msg, msg.getAllRecipients());
+
+            System.out.println("Response: " + t.getLastServerResponse());
+
+            t.close();
+
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public static void sendGiftCard(String type, GiftObj giftObj) {
+
+        Properties prop = System.getProperties();
+        prop.put("mail.smtp.starttls.enable","true");
+        prop.put("mail.smtp.auth", "true");
+        prop.put("mail.smtp.port", "587");
+//        prop.put("mail.smtp.socketFactory.class", "javax.net.ssl.TLSSocketFactory");
+//        prop.put("mail.smtp.socketFactory.fallback", "false");
+
+        Session session = Session.getInstance(prop, null);
+        Message msg = new MimeMessage(session);
+
+        try {
+
+            giftCardMessageResolver(type, giftObj);
 
             msg.setFrom(new InternetAddress(EMAIL_FROM));
 
@@ -221,5 +273,58 @@ public class SendEmail {
 
     }
 
+    private static void giftCardMessageResolver(String type, GiftObj giftObj){
+
+        String fromName = giftObj.getFromName();
+        String fromEmail = giftObj.getFromEmail();
+        GiftCard giftCard = giftObj.getGiftCard();
+        String recipient = giftCard.getEmail();
+
+        switch (type){
+            case "recipient":
+                emailTo = recipient;
+                emailSubject = "You have been given a gift card from " + fromName;
+                emailText = new StringBuilder("<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored.png'" +
+                        " alt='Howling Wolfe Logo' width='300px'><br><br>")
+                        .append("<h1>Hello from HowlingWolfe Canoe and Kayak</h1><br><br>")
+                        .append("<h3>")
+                        .append(fromName).append(" has sent you a gift card in the amount of $")
+                        .append(giftCard.getBalance()).append("<br><br>");
+
+                        if(giftObj.getMessage().length() > 0){
+                            emailText.append(fromName).append(" says:<br>")
+                                    .append(giftObj.getMessage()).append("<br><br>");
+                        }
+
+                        emailText.append("To redeem your gift card, please visit <a href='https://www.howlingwolfe" +
+                        ".com/rentals'>howlingwolfe.com</a> and make a reservation. <br><br>")
+                        .append(" We look forward to paddling with you soon! <br> " +
+                    " <a href='https://www.howlingwolfe.com'>HowlingWolfe Canoe & Kayak</a> </h3>");
+                break;
+            case "sender":
+                emailTo = fromEmail;
+                emailSubject = "Thank you for purchasing a gift card from HowlingWolfe!";
+                emailText = new StringBuilder("<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored.png'" +
+                        " alt='Howling Wolfe Logo' width='300px'><br><br>")
+                        .append("<h1>Hello ").append(fromName).append(",</h1><br><br>")
+                        .append("<h3> Thank you for purchasing a gift card!<br><br>")
+                        .append("We have sent an email with the gift card and how to redeem it to: ")
+                        .append(recipient).append("<br><br>")
+                        .append("Thank you again, <br><br>")
+                        .append("<a href='https://www.howlingwolfe.com'>HowlingWolfe Canoe & Kayak</a> </h3>");
+                break;
+            case "Jake":
+                emailTo = "jake@howlingwolfe.com";
+                emailSubject = "New Gift Card Purchased";
+                emailText = new StringBuilder("<h1> New gift card was purchased</h1><br><br>")
+                        .append("Recipient: ").append(recipient).append("<br>")
+                        .append("Amount: $").append(giftCard.getBalance()).append("<br>")
+                        .append("Card Number: ").append(giftCard.getCardNumber()).append("<br>")
+                        .append("Sender: ").append(fromName).append("<br>")
+                        .append("Sender's email: ").append(fromEmail).append("<br><br>")
+                        .append("An email has been sent to both parties.");
+
+        }
+    }
 
 }

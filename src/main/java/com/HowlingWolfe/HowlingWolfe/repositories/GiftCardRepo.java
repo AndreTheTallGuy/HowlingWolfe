@@ -1,11 +1,12 @@
 package com.HowlingWolfe.HowlingWolfe.repositories;
 
-import com.HowlingWolfe.HowlingWolfe.models.Coupon;
+import com.HowlingWolfe.HowlingWolfe.models.GiftCard;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CouponRepo extends JpaRepository<Coupon, Integer> {
+public interface GiftCardRepo extends JpaRepository<GiftCard, Integer> {
 
-    Coupon findByCode(String code);
+    GiftCard findByCardNumber(int cardNumber);
+
 }
