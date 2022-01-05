@@ -30,7 +30,7 @@ public class GiftCardService {
     public String postGiftCard(GiftObj giftObj){
         SendEmail.sendGiftCard("recipient", giftObj);
         SendEmail.sendGiftCard("sender", giftObj);
-//        SendEmail.sendGiftCard("Jake", giftObj);
+        SendEmail.sendGiftCard("Jake", giftObj);
 
         GiftCard giftCard = giftObj.getGiftCard();
         try {
