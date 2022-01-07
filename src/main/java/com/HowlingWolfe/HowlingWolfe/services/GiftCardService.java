@@ -53,6 +53,10 @@ public class GiftCardService {
     }
 
     public String updateBalance(GiftCard giftCard){
+
+//        send email with new balance!!!!!!!!!!!!
+
+
         try {
             int cardNumber = giftCard.getCardNumber();
             int newBalance = giftCard.getBalance();

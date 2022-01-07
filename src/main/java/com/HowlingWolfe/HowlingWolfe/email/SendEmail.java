@@ -199,8 +199,8 @@ public class SendEmail {
                                 .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
                 break;
             case "orderJake":
-                emailTo = "jake@howlingwolfe.com";
-//                emailTo = "andre.entrekin@gmail.com";
+//                emailTo = "jake@howlingwolfe.com";
+                emailTo = "andre.entrekin@gmail.com";
                 emailSubject = "New Rental";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
                         .append("<h1>").append(customer.getFirstName()).append(" ").append(customer.getLastName())
@@ -300,12 +300,14 @@ public class SendEmail {
         String fromName = giftObj.getFromName();
         String fromEmail = giftObj.getFromEmail();
         GiftCard giftCard = giftObj.getGiftCard();
+        double balance = ((double) giftCard.getBalance() / 100);
         String message = giftObj.getMessage();
         String recipient = giftCard.getEmail();
 
         switch (type){
             case "recipient":
-
+                System.out.println(giftCard.getBalance());
+                System.out.println(balance);
                 emailTo = recipient;
                 emailSubject = "You have been given a gift card from " + fromName;
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
@@ -318,7 +320,7 @@ public class SendEmail {
                         .append("<div style='text-align:left; margin: 0 10%;'>" +
                                 "<div style='font-size: 22px;'>")
                         .append(fromName).append(" has sent you a gift card in the amount of <span style='font-size: 150%'>$")
-                        .append(giftCard.getBalance()).append("</span></div>")
+                        .append(balance).append("</span></div>")
                         .append("<div style='font-size: 22px; margin: 10px 0'>Your card number is: <span " +
                                 "style='font-size: 150%'>")
                         .append(giftCard.getCardNumber()).append("</span></div>")
@@ -356,7 +358,7 @@ public class SendEmail {
                 emailSubject = "New Gift Card Purchased";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>").append("<h1> New gift card was purchased</h1><br><br>")
                         .append("Recipient: ").append(recipient).append("<br>")
-                        .append("Amount: $").append(giftCard.getBalance()).append("<br>")
+                        .append("Amount: $").append(balance).append("<br>")
                         .append("Card Number: ").append(giftCard.getCardNumber()).append("<br>")
                         .append("Sender: ").append(fromName).append("<br>")
                         .append("Sender's email: ").append(fromEmail).append("<br><br>")
