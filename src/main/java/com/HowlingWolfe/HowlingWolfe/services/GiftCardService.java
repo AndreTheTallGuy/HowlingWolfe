@@ -6,6 +6,8 @@ import com.HowlingWolfe.HowlingWolfe.models.GiftObj;
 import com.HowlingWolfe.HowlingWolfe.repositories.GiftCardRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -42,13 +44,14 @@ public class GiftCardService {
         }
     }
 
-    public String deleteById(int id){
+//    @Transactional
+    public String deleteByCardNumber(int cardNumber){
         try {
-            giftCardRepo.deleteById(id);
+            giftCardRepo.deleteByCardNumber(cardNumber);
             return "Success";
         } catch (Exception e){
             System.out.println(e.getMessage());
-            return "Failure";
+            return e.getMessage();
         }
     }
 

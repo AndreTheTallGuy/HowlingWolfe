@@ -46,9 +46,9 @@ public class GiftCardController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @DeleteMapping(path = "/delete/{id}")
-    public ResponseEntity<String> deleteById(@PathVariable int id){
-        String response = giftCardService.deleteById(id);
+    @DeleteMapping(path = "/delete/{cardNumber}")
+    public ResponseEntity<String> deleteById(@PathVariable int cardNumber){
+        String response = giftCardService.deleteByCardNumber(cardNumber);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
