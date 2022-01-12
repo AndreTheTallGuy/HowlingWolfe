@@ -6,8 +6,6 @@ import com.HowlingWolfe.HowlingWolfe.models.GiftObj;
 import com.HowlingWolfe.HowlingWolfe.repositories.GiftCardRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -44,7 +42,6 @@ public class GiftCardService {
         }
     }
 
-//    @Transactional
     public String deleteByCardNumber(int cardNumber){
         try {
             giftCardRepo.deleteByCardNumber(cardNumber);
