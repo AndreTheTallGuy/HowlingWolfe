@@ -315,7 +315,7 @@ public class SendEmail {
                                 "<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored" +
                                 ".png'" +
                         " alt='Howling Wolfe Logo' width='300px'><br><br>")
-                        .append("<div style='font-size: 35px;'>Hello from HowlingWolfe Canoe and " +
+                        .append("<div style='font-size: 35px;'>Hello from Howling Wolfe Canoe and " +
                                 "Kayak</div><br/><br/>")
                         .append("<div style='text-align:left; margin: 0 10%;'>" +
                                 "<div style='font-size: 22px;'>")
@@ -327,9 +327,7 @@ public class SendEmail {
                         .append("<span style='color: red'>Please keep this number safe!</span> <br><br>");
 
                         if(giftObj.getMessage() != null){
-                            emailText.append("<div style='font-size: 15px; width: 80%; border: 1px solid grey; " +
-                                    "border-radius: 10px; " +
-                                    "padding: 10px;'>").append(fromName).append(" says:<hr><br>")
+                            emailText.append("<div style='font-size: 15px;'>").append(fromName).append(" says:<br>")
                                     .append(message.replace("\n","<br/>")).append("</div></div><br><br>");
                         }
 
@@ -345,7 +343,7 @@ public class SendEmail {
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>").append("<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored.png'" +
                         " alt='Howling Wolfe Logo' width='300px'><br><br>")
                         .append("<h1>Hello ").append(fromName).append(",</h1><br><br>")
-                        .append("<h3> Thank you for purchasing a gift card!<br><br>")
+                        .append("<h3> Thank you for purchasing a gift card for $").append(balance).append("!<br><br>")
                         .append("We have sent an email with the gift card and how to redeem it to: ")
                         .append(recipient).append("<br><br>")
                         .append("Thank you again, <br><br>")
