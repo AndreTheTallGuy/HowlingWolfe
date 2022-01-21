@@ -16,6 +16,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import java.io.*;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
@@ -304,10 +305,12 @@ public class SendEmail {
         String message = giftObj.getMessage();
         String recipient = giftCard.getEmail();
 
+        final DecimalFormat df = new DecimalFormat("0.00");
+
         switch (type){
             case "recipient":
                 System.out.println(giftCard.getBalance());
-                System.out.println(balance);
+                System.out.println(df.format(balance));
                 emailTo = recipient;
                 emailSubject = "You have been given a gift card from " + fromName;
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
@@ -320,7 +323,7 @@ public class SendEmail {
                         .append("<div style='text-align:left; margin: 0 10%;'>" +
                                 "<div style='font-size: 22px;'>")
                         .append(fromName).append(" has sent you a gift card in the amount of <span style='font-size: 150%'>$")
-                        .append(balance).append("</span></div>")
+                        .append(df.format(balance)).append("</span></div>")
                         .append("<div style='font-size: 22px; margin: 10px 0'>Your card number is: <span " +
                                 "style='font-size: 150%'>")
                         .append(giftCard.getCardNumber()).append("</span></div>")
@@ -343,7 +346,9 @@ public class SendEmail {
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>").append("<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored.png'" +
                         " alt='Howling Wolfe Logo' width='300px'><br><br>")
                         .append("<h1>Hello ").append(fromName).append(",</h1><br><br>")
-                        .append("<h3> Thank you for purchasing a gift card for $").append(balance).append("!<br><br>")
+                        .append("<h3> Thank you for purchasing a gift card for $").append(df.format(balance)).append(
+                                "!<br" +
+                                "><br>")
                         .append("We have sent an email with the gift card and how to redeem it to: ")
                         .append(recipient).append("<br><br>")
                         .append("Thank you again, <br><br>")
@@ -356,7 +361,7 @@ public class SendEmail {
                 emailSubject = "New Gift Card Purchased";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>").append("<h1> New gift card was purchased</h1><br><br>")
                         .append("Recipient: ").append(recipient).append("<br>")
-                        .append("Amount: $").append(balance).append("<br>")
+                        .append("Amount: $").append(df.format(balance)).append("<br>")
                         .append("Card Number: ").append(giftCard.getCardNumber()).append("<br>")
                         .append("Sender: ").append(fromName).append("<br>")
                         .append("Sender's email: ").append(fromEmail).append("<br><br>")
