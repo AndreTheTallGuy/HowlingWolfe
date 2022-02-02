@@ -149,8 +149,8 @@ public class SendEmail {
                         .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
                 break;
             case "orderJake":
-//                emailTo = "jake@howlingwolfe.com";
-                emailTo = "andre.entrekin@gmail.com";
+                emailTo = "jake@howlingwolfe.com";
+//                emailTo = "andre.entrekin@gmail.com";
                 emailSubject = "New Rental";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
                         .append("<h1>").append(customer.getFirstName()).append(" ").append(customer.getLastName())
@@ -253,8 +253,8 @@ public class SendEmail {
         fromEmail = giftObj.getFromEmail();
         } else {
             fromName = "Jake Wolfe";
-//            fromEmail = "jake@howlingwolfe.com";
-            fromEmail = "andre.entrekin@gmail.com";
+            fromEmail = "jake@howlingwolfe.com";
+//            fromEmail = "andre.entrekin@gmail.com";
             System.out.println(giftObj);
         }
         GiftCard giftCard = giftObj.getGiftCard();
@@ -315,8 +315,8 @@ public class SendEmail {
                         .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
                 break;
             case "Jake":
-//                emailTo = "jake@howlingwolfe.com";
-                emailTo = "andre.entrekin@gmail.com";
+                emailTo = "jake@howlingwolfe.com";
+//                emailTo = "andre.entrekin@gmail.com";
                 emailSubject = "New Gift Card Purchased";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
                         .append("<h1> New gift card was purchased</h1><br><br>")
