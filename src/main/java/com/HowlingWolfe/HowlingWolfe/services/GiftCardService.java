@@ -29,8 +29,10 @@ public class GiftCardService {
 
     public String postGiftCard(GiftObj giftObj){
         SendEmail.sendGiftCard("recipient", giftObj);
-        SendEmail.sendGiftCard("sender", giftObj);
         SendEmail.sendGiftCard("Jake", giftObj);
+        if(giftObj.getFromName() != null){
+        SendEmail.sendGiftCard("sender", giftObj);
+        }
 
         GiftCard giftCard = giftObj.getGiftCard();
         try {
@@ -53,10 +55,7 @@ public class GiftCardService {
     }
 
     public String updateBalance(GiftCard giftCard){
-
-//        send email with new balance!!!!!!!!!!!!
-
-
+        SendEmail.sendGiftCardBalance("recipient", giftCard);
         try {
             int cardNumber = giftCard.getCardNumber();
             int newBalance = giftCard.getBalance();
