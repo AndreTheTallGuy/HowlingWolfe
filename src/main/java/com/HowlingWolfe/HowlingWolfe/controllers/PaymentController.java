@@ -25,9 +25,10 @@ public class PaymentController {
     @PostMapping("/charge")
     public ResponseEntity<String> chargeCard(@RequestBody ChargeObj chargeObj) {
         String token = chargeObj.getToken();
-        Double amount = chargeObj.getPrice();
+        double amount = chargeObj.getPrice();
+        int orderId = chargeObj.getOrderId();
         try{
-            this.stripeClient.chargeCreditCard(token, amount);
+            this.stripeClient.chargeCreditCard(token, amount, orderId);
         } catch (Exception e) {
             System.out.println(e.getMessage());;
             return new ResponseEntity<>(e.getMessage(), HttpStatus.OK);

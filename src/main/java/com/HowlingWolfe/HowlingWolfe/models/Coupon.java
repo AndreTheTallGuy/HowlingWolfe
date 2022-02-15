@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "coupon")
@@ -31,5 +33,12 @@ public class Coupon {
 
     @Column(name = "discount")
     private int discount;
+
+    @Column(name = "discountType")
+    private String discountType;
+
+    @ElementCollection
+    @Column(name = "whenGood")
+    private List<String> whenGood = new ArrayList<String>();
 
 }

@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class ChargeObj {
 
     private String token;
-
     private double price;
+    private int orderId;
 }

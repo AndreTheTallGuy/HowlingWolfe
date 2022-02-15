@@ -16,11 +16,16 @@ public class StripeClient {
         Stripe.apiKey = System.getenv("STRIPE_KEY");
     }
 
-    public Charge chargeCreditCard(String token, double amount) throws Exception {
+    public Charge chargeCreditCard(String token, double amount, int orderId) throws Exception {
         Map<String, Object> chargeParams = new HashMap<String, Object>();
         chargeParams.put("amount", (int)(amount * 100));
         chargeParams.put("currency", "USD");
         chargeParams.put("source", token);
+
+        Map<String, Integer> initialMetadata = new HashMap<>();
+        initialMetadata.put("order_id", orderId);
+        chargeParams.put("metadata", initialMetadata);
+
         return Charge.create(chargeParams);
     }
 }

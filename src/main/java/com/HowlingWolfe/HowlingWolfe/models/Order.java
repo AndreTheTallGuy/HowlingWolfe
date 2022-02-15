@@ -22,7 +22,6 @@ public class Order {
 
     @Id
     @Column(name = "order_id")
-    @GeneratedValue
     private int order_id;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
