@@ -39,6 +39,6 @@ public class Coupon {
 
     @ElementCollection
     @Column(name = "whenGood")
-    private List<String> whenGood = new ArrayList<String>();
+    private List<Date> whenGood = new ArrayList<Date>();
 
 }
