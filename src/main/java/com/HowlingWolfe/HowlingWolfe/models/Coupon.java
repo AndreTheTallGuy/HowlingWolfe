@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -41,4 +42,6 @@ public class Coupon {
     @Column(name = "whenGood")
     private List<Date> whenGood = new ArrayList<Date>();
 
+    @Column(name = "goodForGC")
+    private Boolean goodForGC;
 }
