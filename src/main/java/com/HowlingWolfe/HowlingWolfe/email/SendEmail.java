@@ -29,11 +29,63 @@ public class SendEmail {
     private static final String PASSWORD = System.getenv("EMAIL_PASSWORD");
     private static final String EMAIL_FROM = "jake@howlingwolfe.com";
 
+    private static final Date todaysDate = new Date();
+
+    private static final String adminEmail = "jake@howlingwolfe.com";
+//    private static final String adminEmail = "andre.entrekin@gmail.com";
+
     private static String emailTo = "";
     private static String emailSubject = "";
     private static StringBuilder emailText = new StringBuilder();
 
-    private static Date todaysDate = new Date();
+    private static final StringBuilder header = new StringBuilder("<div id='main' align='center' style='margin: auto;" +
+            "       text-align: center; font-size: 18px;'>" +
+            "   <img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored.png'" +
+            "       alt='Howling Wolfe Logo' width='300px'><br><br>")
+            .append("<div style='font-size: 35px;'>Hello from Howling Wolfe Canoe and " +
+                    "Kayak</div><br/><br/>");
+
+    private static final StringBuilder footer = new StringBuilder("<footer style=\"text-align: center\">" +
+            "    <hr width:\"80%\">  <br>" +
+            "    <div style=\"margin: 10px; font-size: 30px; color: rgb(77, 76, 76);\">" +
+            "        <a style=\"padding: 10px\" target=\"_blank\" href=\"https://www.instagram.com/howlingwolfecanoe/\"><i class=\"fab fa-instagram\"></i></a>" +
+            "        <a style=\"padding: 10px\" target=\"_blank\" href=\"https://vm.tiktok.com/TTPdrDCcv9/\"><i class=\"fab fa-tiktok\"></i></a>" +
+            "        <a style=\"padding: 10px\" target=\"_blank\" href=\"https://facebook.com/Howlingwolfecanoeandkayak/\"><i class=\"fab fa-facebook-square\"></i></a>" +
+            "    </div>" +
+            "    <div  style=\"margin: auto !important; max-width: 500px; font-size: 20px; padding-bottom: 7px;\">" +
+//            "        <a style=\"font-family: 'Trebuchet MS', sans-serif; opacity: none\"> </a>" +
+            "        <a style=\"font-family: 'Trebuchet MS', sans-serif; text-decoration:none;\" target=\"_blank\"" +
+            "            href=\"https://www.howlingwolfe.com/rentals\">RENTALS</a>" +
+            "        <span> | </span>" +
+            "        <a style=\"font-family: 'Trebuchet MS', sans-serif; text-decoration:none;\" target=\"_blank\" " +
+            "            href=\"https://www.howlingwolfe.com/lessons\">LESSONS</a>" +
+            "        <span> | </span>" +
+            "        <a style=\"font-family: 'Trebuchet MS', sans-serif; text-decoration:none;\" target=\"_blank\" " +
+            "            href=\"https://www.howlingwolfe.com/guided\">GUIDED</a>" +
+//            "        <span> | </span>" +
+//            "        <a style=\"font-family: 'Trebuchet MS', sans-serif; text-decoration:none;\" target=\"_blank\" " +
+//            "            href=\"https://www.howlingwolfe.com/contact\">CONTACT</a>" +
+            "    </div>" +
+            "    <table cellpadding=\"0\" cellspacing=\"0\" style=\"margin:auto;\">" +
+            "       <tr>" +
+            "           <td align='center' style='padding-bottom:5px'> <a style=\"font-family: 'Trebuchet MS', " +
+            "               sans-serif; font-size: 20px; text-decoration:none;\" target=\"_blank\"" +
+            "               href=\"https://www.howlingwolfe.com\">Howling Wolfe Canoe and Kayak</a> </td>" +
+            "       </tr> <tr>" +
+            "           <td align='center' style='padding-bottom:5px' font-family: 'Trebuchet MS', " +
+            "               sans-serif; font-size: 20px;\">Aurora, Illinois</td>" +
+            "       </tr> <tr>" +
+            "           <td align='center' style='padding-bottom:5px'><a style=\"font-family: 'Trebuchet MS', " +
+            "               sans-serif; font-size: 20px; text-decoration:none;\"" +
+            "               href='tel:+6303449744'>(630) 344-9744</a></td>" +
+            "       </tr> <tr>" +
+            "           <td align='center' style='padding-bottom:5px'><a style=\"font-family: 'Trebuchet MS', " +
+            "               sans-serif; font-size: 20px; text-decoration:none;\"" +
+            "               href=\"mailto:info@howlingwolfe.com\">info@howlingwolfe.com</a></tr>" +
+            "   </table><br><br>" +
+            "</footer>").append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+
+
 
     public static void send(String type, Customer customer, List<Boat> boats) {
         messageResolver(type, customer, boats);
@@ -119,10 +171,8 @@ public class SendEmail {
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for your Reservation";
                 emailText =
-
                         new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
-                                .append("<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored.png' " +
-                                        "alt='Howling Wolfe Logo' width='300px'><br><br>");
+                                .append(header);
                 emailText.append("<h1>Thank you ").append(customer.getFirstName()).append(" ")
                         .append(customer.getLastName()).append(" for your reservation of: </h1> <h3> <br> " +
                         "<br>");
@@ -144,12 +194,11 @@ public class SendEmail {
                         "reservation time. <br><br>")
                         .append("Please bring water to drink, a snack, dress in layers and be prepared to " +
                                 "get wet, water shoes are recommended <br><br>")
-                        .append(" We look forward to paddling with you soon! <br> " +
-                                " HowlingWolfe Canoe & Kayak </h3>")
-                        .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                        .append(" We look forward to paddling with you soon! <br> </h3>")
+                        .append(footer);
                 break;
             case "orderJake":
-                emailTo = "jake@howlingwolfe.com";
+                emailTo = adminEmail;
 //                emailTo = "andre.entrekin@gmail.com";
                 emailSubject = "New Rental";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
@@ -174,14 +223,15 @@ public class SendEmail {
                 emailSubject = "Thank you for contacting us";
                 emailText =
                         new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                                .append(header)
                                 .append("<h1>Thank you ").append(customer.getFirstName()).append(" ")
                                 .append(customer.getLastName())
-                                .append(" for contacting us. Someone will respond to your message as soon as ")
-                                .append("possible<br> <br>").append(" HowlingWolfe Canoe & Kayak </h1>")
-                                .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                                .append(" for contacting us. <br/> Someone will respond to your message as soon as ")
+                                .append("possible </h1> <br/>")
+                                .append(footer);
                 break;
             case "contactJake":
-                emailTo = "jake@howlingwolfe.com";
+                emailTo = adminEmail;
                 emailSubject = "Someone has reached out";
                 emailText =
                         new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
@@ -197,14 +247,15 @@ public class SendEmail {
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for contacting us";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                        .append(header)
                         .append("<h1>Thank you ").append(customer.getFirstName()).append(" ")
                         .append(customer.getLastName())
                         .append(" for contacting us about lessons. Someone will respond to your message ")
-                        .append("as soon as possible <br> <br> ").append(" HowlingWolfe Canoe & Kayak </h1>")
-                        .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                        .append("as soon as possible <br></h1>")
+                        .append(footer);
                 break;
             case "lessonsJake":
-                emailTo = "jake@howlingwolfe.com";
+                emailTo = adminEmail;
                 emailSubject = "Someone has reached out about lessons";
                 emailText =
                         new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
@@ -220,14 +271,15 @@ public class SendEmail {
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for contacting us";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                        .append(header)
                         .append("<h1>Thank you ").append(customer.getFirstName()).append(" ")
                         .append(customer.getLastName())
                         .append(" for contacting us about a guided trip. Someone will respond to your ")
-                        .append("message as soon as possible <br> <br> ").append(" HowlingWolfe Canoe & Kayak </h1>")
-                        .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                        .append("message as soon as possible <br></h1>")
+                        .append(footer);
                 break;
             case "guidedJake":
-                emailTo = "jake@howlingwolfe.com";
+                emailTo = adminEmail;
                 emailSubject = "Someone has reached out about a guided trip";
                 emailText =
                         new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
@@ -245,8 +297,6 @@ public class SendEmail {
     }
 
     private static void giftCardMessageResolver(String type, GiftObj giftObj)  {
-        System.out.println(giftObj);
-
         String fromName, fromEmail;
         if(giftObj.getFromName() != null){
         fromName = giftObj.getFromName();
@@ -271,12 +321,7 @@ public class SendEmail {
                 emailTo = recipient;
                 emailSubject = "You have been given a gift card from " + fromName;
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
-                        .append("<div id='main' style='margin: auto; text-align: center; font-size: 18px;'>" +
-                                "<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored" +
-                                ".png'" +
-                                " alt='Howling Wolfe Logo' width='300px'><br><br>")
-                        .append("<div style='font-size: 35px;'>Hello from Howling Wolfe Canoe and " +
-                                "Kayak</div><br/><br/>")
+                        .append(header)
                         .append("<div style='text-align:left; margin: 0 10%;'>" +
                                 "<div style='font-size: 22px;'>")
                         .append(fromName)
@@ -289,33 +334,29 @@ public class SendEmail {
 
                 if (giftObj.getMessage() != null) {
                     emailText.append("<div style='font-size: 15px;'>").append(fromName).append(" says:<br>")
-                            .append(message.replace("\n", "<br/>")).append("</div></div><br><br>");
+                            .append(message.replace("\n", "<br/>")).append("</div>");
                 }
 
-                emailText.append("To redeem your gift card, please visit <a href='https://www.howlingwolfe" +
+                emailText.append("</div><br><br>To redeem your gift card, please visit <a href='https://www.howlingwolfe" +
                         ".com/rentals'>howlingwolfe.com</a> and make a reservation. <br><br>")
-                        .append(" We look forward to paddling with you soon! <br> " +
-                                " <a href='https://www.howlingwolfe.com'>HowlingWolfe Canoe & Kayak</a> </h3></div>")
-                        .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                        .append(" We look forward to paddling with you soon! <br> ")
+                        .append(footer);
                 break;
             case "sender":
                 emailTo = fromEmail;
                 emailSubject = "Thank you for purchasing a gift card from HowlingWolfe!";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
-                        .append("<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored.png'" +
-                                " alt='Howling Wolfe Logo' width='300px'><br><br>")
-                        .append("<h1>Hello ").append(fromName).append(",</h1><br><br>")
+                        .append(header)
+                        .append("<h1>").append(fromName).append(",</h1><br><br>")
                         .append("<h3> Thank you for purchasing a gift card for $").append(df.format(balance)).append(
-                                "!<br" +
-                                        "><br>")
+                                "!<br><br>")
                         .append("We have sent an email with the gift card and how to redeem it to: ")
                         .append(recipient).append("<br><br>")
-                        .append("Thank you again, <br><br>")
-                        .append("<a href='https://www.howlingwolfe.com'>HowlingWolfe Canoe & Kayak</a> </h3>")
-                        .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                        .append("Thank you again, <br><br></h3>")
+                        .append(footer);
                 break;
             case "Jake":
-                emailTo = "jake@howlingwolfe.com";
+                emailTo = adminEmail;
 //                emailTo = "andre.entrekin@gmail.com";
                 emailSubject = "New Gift Card Purchased";
                 emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
@@ -345,10 +386,7 @@ public class SendEmail {
         emailTo = recipient;
         emailSubject = "Here is your updated balance on your gift card";
         emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
-                .append("<div id='main' style='margin: auto; text-align: center; font-size: 18px;'>" +
-                        "<img src='https://www.howlingwolfe.com/assets/HowlingWolfeColored" +
-                        ".png'" +
-                        " alt='Howling Wolfe Logo' width='300px'><br><br>")
+                .append(header)
                 .append("<div style='font-size: 35px;'>Hello from Howling Wolfe Canoe and " +
                         "Kayak</div><br/><br/>")
                 .append("<div style='text-align:left; margin: 0 10%;'>" +
@@ -362,9 +400,8 @@ public class SendEmail {
                 .append("<br><br>")
                 .append("To redeem your gift card, please visit <a href='https://www.howlingwolfe" +
                 ".com/rentals'>howlingwolfe.com</a> and make a reservation. <br><br>")
-                .append(" We look forward to paddling with you soon! <br> " +
-                        " <a href='https://www.howlingwolfe.com'>HowlingWolfe Canoe & Kayak</a> </h3></div>")
-                .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                .append(" We look forward to paddling with you soon! <br></h3></div>")
+                .append(footer);
 //                break;
 //        }
     }
