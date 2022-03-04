@@ -29,10 +29,8 @@ public class SendEmail {
     private static final String PASSWORD = System.getenv("EMAIL_PASSWORD");
     private static final String EMAIL_FROM = "jake@howlingwolfe.com";
 
-    private static final Date todaysDate = new Date();
-
-    private static final String adminEmail = "jake@howlingwolfe.com";
-//    private static final String adminEmail = "andre.entrekin@gmail.com";
+//    private static final String adminEmail = "jake@howlingwolfe.com";
+    private static final String adminEmail = "andre.entrekin@gmail.com";
 
     private static String emailTo = "";
     private static String emailSubject = "";
@@ -83,7 +81,7 @@ public class SendEmail {
             "               sans-serif; font-size: 20px; text-decoration:none;\"" +
             "               href=\"mailto:info@howlingwolfe.com\">info@howlingwolfe.com</a></tr>" +
             "   </table><br><br>" +
-            "</footer>").append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+            "</footer>").append("<span style='opacity:0'>").append(new Date()).append("</span>");
 
 
 
@@ -171,7 +169,7 @@ public class SendEmail {
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for your Reservation";
                 emailText =
-                        new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                        new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                                 .append(header);
                 emailText.append("<h1>Thank you ").append(customer.getFirstName()).append(" ")
                         .append(customer.getLastName()).append(" for your reservation of: </h1> <h3> <br> " +
@@ -201,7 +199,7 @@ public class SendEmail {
                 emailTo = adminEmail;
 //                emailTo = "andre.entrekin@gmail.com";
                 emailSubject = "New Rental";
-                emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                emailText = new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                         .append("<h1>").append(customer.getFirstName()).append(" ").append(customer.getLastName())
                         .append(" has placed an order <br> </h1>").append(" Contact info: <br>Email: ")
                         .append(customer.getEmail()).append("<br>Phone: ").append(customer.getPhone())
@@ -216,13 +214,13 @@ public class SendEmail {
                     emailText.append("Height: ").append(boat.getHeight()).append("<br>");
                     emailText.append("Weight: ").append(boat.getWeight()).append("<br> <br>");
                 }
-                emailText.append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                emailText.append("<span style='opacity:0'>").append(new Date()).append("</span>");
                 break;
             case "contact":
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for contacting us";
                 emailText =
-                        new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                        new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                                 .append(header)
                                 .append("<h1>Thank you ").append(customer.getFirstName()).append(" ")
                                 .append(customer.getLastName())
@@ -234,19 +232,19 @@ public class SendEmail {
                 emailTo = adminEmail;
                 emailSubject = "Someone has reached out";
                 emailText =
-                        new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                        new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                                 .append("<h1>").append(customer.getFirstName()).append(" ")
                                 .append(customer.getLastName())
                                 .append(" has reached out using the contact form. </h1> <br> <br> ")
                                 .append(customer.getMessage()).append(" <br> <br> Contact info: <br>Email: ")
                                 .append(customer.getEmail()).append("<br>Phone: ").append(customer.getPhone())
                                 .append(" <br> <br>")
-                                .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                                .append("<span style='opacity:0'>").append(new Date()).append("</span>");
                 break;
             case "lessons":
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for contacting us";
-                emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                emailText = new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                         .append(header)
                         .append("<h1>Thank you ").append(customer.getFirstName()).append(" ")
                         .append(customer.getLastName())
@@ -258,19 +256,19 @@ public class SendEmail {
                 emailTo = adminEmail;
                 emailSubject = "Someone has reached out about lessons";
                 emailText =
-                        new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                        new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                                 .append("<h1>").append(customer.getFirstName()).append(" ")
                                 .append(customer.getLastName())
                                 .append(" has reached out about lessons. </h1> <br> <br> ")
                                 .append(customer.getMessage()).append(" <br> <br> Contact info: <br>Email: ")
                                 .append(customer.getEmail()).append("<br>Phone: ").append(customer.getPhone())
                                 .append(" <br> <br>")
-                                .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                                .append("<span style='opacity:0'>").append(new Date()).append("</span>");
                 break;
             case "guided":
                 emailTo = customer.getEmail();
                 emailSubject = "Thank you for contacting us";
-                emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                emailText = new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                         .append(header)
                         .append("<h1>Thank you ").append(customer.getFirstName()).append(" ")
                         .append(customer.getLastName())
@@ -282,14 +280,14 @@ public class SendEmail {
                 emailTo = adminEmail;
                 emailSubject = "Someone has reached out about a guided trip";
                 emailText =
-                        new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                        new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                                 .append("<h1>").append(customer.getFirstName()).append(" ")
                                 .append(customer.getLastName())
                                 .append(" has reached out about a guided trip. </h1> <br> <br> ")
                                 .append(customer.getMessage()).append(" <br> <br> Contact info: <br>Email: ")
                                 .append(customer.getEmail()).append("<br>Phone: ").append(customer.getPhone())
                                 .append(" <br> <br>")
-                                .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                                .append("<span style='opacity:0'>").append(new Date()).append("</span>");
                 break;
         }
 
@@ -320,7 +318,7 @@ public class SendEmail {
                 System.out.println(df.format(balance));
                 emailTo = recipient;
                 emailSubject = "You have been given a gift card from " + fromName;
-                emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                emailText = new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                         .append(header)
                         .append("<div style='text-align:left; margin: 0 10%;'>" +
                                 "<div style='font-size: 22px;'>")
@@ -345,7 +343,7 @@ public class SendEmail {
             case "sender":
                 emailTo = fromEmail;
                 emailSubject = "Thank you for purchasing a gift card from HowlingWolfe!";
-                emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                emailText = new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                         .append(header)
                         .append("<h1>").append(fromName).append(",</h1><br><br>")
                         .append("<h3> Thank you for purchasing a gift card for $").append(df.format(balance)).append(
@@ -359,7 +357,7 @@ public class SendEmail {
                 emailTo = adminEmail;
 //                emailTo = "andre.entrekin@gmail.com";
                 emailSubject = "New Gift Card Purchased";
-                emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+                emailText = new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                         .append("<h1> New gift card was purchased</h1><br><br>")
                         .append("Recipient: ").append(recipient).append("<br>")
                         .append("Amount: $").append(df.format(balance)).append("<br>")
@@ -367,7 +365,7 @@ public class SendEmail {
                         .append("Sender: ").append(fromName).append("<br>")
                         .append("Sender's email: ").append(fromEmail).append("<br><br>")
                         .append("An email has been sent to both parties.")
-                        .append("<span style='opacity:0'>").append(todaysDate).append("</span>");
+                        .append("<span style='opacity:0'>").append(new Date()).append("</span>");
                 break;
 
         }
@@ -385,7 +383,7 @@ public class SendEmail {
         System.out.println(df.format(balance));
         emailTo = recipient;
         emailSubject = "Here is your updated balance on your gift card";
-        emailText = new StringBuilder("<span style='opacity:0'>").append(todaysDate).append("</span>")
+        emailText = new StringBuilder("<span style='opacity:0'>").append(new Date()).append("</span>")
                 .append(header)
                 .append("<div style='font-size: 35px;'>Hello from Howling Wolfe Canoe and " +
                         "Kayak</div><br/><br/>")
