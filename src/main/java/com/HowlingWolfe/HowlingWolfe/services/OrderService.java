@@ -41,7 +41,6 @@ public class OrderService {
 
 
     public String postOrder(Order orderObj){
-        System.out.println("inside service");
         SendEmail.send("order", orderObj.getCustomer(), orderObj.getBoats());
         SendEmail.send("orderJake", orderObj.getCustomer(), orderObj.getBoats());
 
