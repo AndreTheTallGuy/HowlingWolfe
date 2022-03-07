@@ -31,7 +31,9 @@ public class OrderController {
 
     @GetMapping(path = "/upcoming")
     public ResponseEntity<Set<Order>> getAllOrdersUpcoming(){
+        System.out.println("received");
         Set<Order> response = orderService.getOrdersUpcoming();
+        System.out.println("sending");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -49,6 +51,8 @@ public class OrderController {
 
     @PostMapping(path = "/post")
     public ResponseEntity<String> postOrder(@RequestBody Order order){
+        System.out.println("post");
+        System.out.println(order);
         String response = orderService.postOrder(order);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
