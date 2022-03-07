@@ -29,8 +29,8 @@ public class SendEmail {
     private static final String PASSWORD = System.getenv("EMAIL_PASSWORD");
     private static final String EMAIL_FROM = "jake@howlingwolfe.com";
 
-//    private static final String adminEmail = "jake@howlingwolfe.com";
-    private static final String adminEmail = "andre.entrekin@gmail.com";
+    private static final String adminEmail = "jake@howlingwolfe.com";
+//    private static final String adminEmail = "andre.entrekin@gmail.com";
 
     private static String emailTo = "";
     private static String emailSubject = "";
