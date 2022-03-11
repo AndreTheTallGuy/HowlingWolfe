@@ -35,5 +35,8 @@ public class GiftCard {
     @Column(name = "purchased_on")
     private Date purchased_on = new Date();
 
+    @Column(name = "coupon")
+    private String coupon;
+
 
 }
