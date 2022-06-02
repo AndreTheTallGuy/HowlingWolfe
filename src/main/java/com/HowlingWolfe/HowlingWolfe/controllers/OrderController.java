@@ -47,6 +47,12 @@ public class OrderController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping(path = "/maxId")
+    public ResponseEntity<Integer> getMaxOrderId(){
+        Integer response = orderService.getMaxOrderId();
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
     @PostMapping(path = "/post")
     public ResponseEntity<String> postOrder(@RequestBody Order order){
         String response = orderService.postOrder(order);

@@ -39,6 +39,8 @@ public class OrderService {
 
     public Set<Order> getTodaysOrders(){ return orderRepo.getTodaysOrders();}
 
+    public Integer getMaxOrderId(){ return orderRepo.getMaxOrderId();}
+
 
     public String postOrder(Order orderObj){
         SendEmail.send("order", orderObj.getCustomer(), orderObj.getBoats());

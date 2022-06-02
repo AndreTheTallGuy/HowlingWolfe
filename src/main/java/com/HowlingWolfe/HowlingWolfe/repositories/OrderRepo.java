@@ -20,4 +20,7 @@ public interface OrderRepo extends JpaRepository<Order, Integer> {
 
     @Query("SELECT o FROM Order o JOIN o.boats b WHERE b.date = ?1")
     Set<Order> findByDate(Date date);
+
+    @Query("SELECT max(order_id) FROM Order")
+    Integer getMaxOrderId();
 }
