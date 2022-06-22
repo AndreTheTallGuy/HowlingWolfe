@@ -14,7 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -33,11 +36,47 @@ public class OrderService {
 
     public List<Order> getOrders(){ return orderRepo.findAll(); }
 
-    public Set<Order> getOrdersByDate(Date date) {return orderRepo.findByDate(date);}
+    public Set<Order> getOrdersByDate(Date date) {
+        Set<Order> upcomingOrders = orderRepo.findUpcoming();
+        Set<Order> result = new HashSet<Order>();
+        System.out.println(upcomingOrders);
+//        Set<Order> test = upcomingOrders.stream()
+//                .flatMap(f -> f.getBoats()
+//                        .stream()
+//                        .filter(boat -> boat.getDate().equals(date))
+//                        .map(o-> o.getOrder()));
+//        for (int i = 0; i < upcomingOrders.size(); i++) {
+//            for (int j = 0; j < upcomingOrders[i].getBoats().size(); j++) {
+//
+//            }
+//        }
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+
+        for (Order order : upcomingOrders) {
+            for (Boat boat : order.getBoats()) {
+                String boatDate = simpleDateFormat.format(boat.getDate());
+                String compareDate = simpleDateFormat.format(date);
+
+                System.out.println("Boat date: " + boatDate + " - Date: " + compareDate);
+                if(boatDate.equals(compareDate)){
+                    System.out.println("matched!");
+                    System.out.println(order);
+                    result.add(order);
+                }
+            }
+        }
+
+        return result;
+    }
 
     public Set<Order> getOrdersUpcoming(){ return orderRepo.findUpcoming();}
 
-    public Set<Order> getTodaysOrders(){ return orderRepo.getTodaysOrders();}
+    public Set<Order> getTodaysOrders(){
+//        DateFormat date = new
+        String thing = "";
+        return orderRepo.getTodaysOrders(thing);
+    }
 
     public Integer getMaxOrderId(){ return orderRepo.getMaxOrderId();}
 

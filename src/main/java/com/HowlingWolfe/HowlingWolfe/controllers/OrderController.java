@@ -3,10 +3,19 @@ package com.HowlingWolfe.HowlingWolfe.controllers;
 import com.HowlingWolfe.HowlingWolfe.models.Order;
 import com.HowlingWolfe.HowlingWolfe.services.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAccessor;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -36,8 +45,13 @@ public class OrderController {
     }
 
     @GetMapping(path = "/date/{date}")
-    public ResponseEntity<Set<Order>> getAllOrdersByDate(@PathVariable Date date){
-        Set<Order> response = orderService.getOrdersByDate(date);
+    public ResponseEntity<Set<Order>> getAllOrdersByDate(@PathVariable String date) {
+        System.out.println(date);
+        TemporalAccessor ta = DateTimeFormatter.ISO_INSTANT.parse(date);
+        Instant i = Instant.from(ta);
+        Date d = Date.from(i);
+        System.out.println(d);
+        Set<Order> response = orderService.getOrdersByDate(d);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
@@ -55,7 +69,11 @@ public class OrderController {
 
     @PostMapping(path = "/post")
     public ResponseEntity<String> postOrder(@RequestBody Order order){
+        System.out.println("in service");
+        System.out.println(order);
         String response = orderService.postOrder(order);
+        System.out.println(response);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 }
